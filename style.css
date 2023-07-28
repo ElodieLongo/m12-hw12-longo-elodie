@@ -6,29 +6,30 @@
 }
 
 .body {
+  margin:0;
+  min-height: 100vh;
   display: grid;
-  grid-template-columns: repeat(3. 100px);
-  grid-template-rows: repeat(3. 100px);
-  grid-template-area:
-  grid-area:
-  ".header" ".nav" ".img_card__container" ".footer"; 
+  grid-template-areas: 
+    "header header header" 
+    "nav . img-card" 
+    "footer footer footer";
+  grid-template-columns: 0.3fr 1fr 0.3fr;
+  grid-auto-rows: 100px 1fr 60px;
   justify-items: center;
-  aoign-items: center;
+  align-items: center;
   font-family: 'Indie Flower', cursive; 
   font-size: 1.2rem;
-  margin: 0;
   box-sizing: border-box;
   min-height: 100vh;
+  row-gap: 10px;
 }
 
 .header {
-	grid-column: 1 / 4;
-	grid-row: 
   background-color: var(--primary);
   color: var(--white);
-  align-items: center;
-  justify-items: center;
-  grid-area: .header;
+  text-align: center;
+  grid-area: header;
+  width: 100%;
 }
 
 .header__title {
@@ -41,10 +42,11 @@
   box-shadow: var(--gray) 4px 4px 10px 2px;
   display: grid;
   row-gap: 24px;
-  grid-template-columns: 1fr;
   min-width: 200px;
   justify-items: center;
-  padding: 12px 0 24px;
+  align-items: center;
+  grid-area: nav;
+  margin: 30px;
 }
 
 .nav__link, .nav__link--active {
@@ -84,31 +86,65 @@
 
 .img_card__container {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
+	grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  grid-area: img-card
 }
 
 .footer {
   align-items: center;
   justify-items: center;
+  grid-area: footer;
 }
 
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 480px) {
+  .body {
+    grid-template-areas: 
+      "header" 
+      "nav" 
+      "img-card" 
+      "footer";
+      grid-template-columns: 1fr;
+      grid-template-rows: 100px 50px 1fr 60px;
+    }
+
+    .img_card__container {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 20px;
+      grid-area: img-card
+    }
+
   .header__title {
     font-size: 2rem;
   }
+
   .nav__container {
     width: 80vw;
     min-width: 300px;
-    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: initial;
+    grid-auto-flow: column;
+    justify-items: center;
+    align-items: center;
+    grid-area: nav;
+    box-shadow: var(--gray) 4px 4px 10px 2px;
+    display: grid;
+    row-gap: 24px;
+    min-width: 200px;
   }
+
   .nav__link, .nav__link--active {
     text-decoration: underline;
   }
+
   .nav__link--active {
     padding: 0;
   }
+
   .nav__link::after, .nav__link--active::after {
     display: none;
   }
 }
+
+
